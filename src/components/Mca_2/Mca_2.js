@@ -152,7 +152,7 @@ const Mca_2 = () => {
 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                                     {/* export specifics */}
-                                    <button className="btn btn-primary mb-3" onClick={() => exportFilteredToExcel(students, 'Filtered_Export.xlsx', selectedColumns)}>
+                                    <button className="btn btn-primary mb-3" onClick={() => exportFilteredToExcel(students, 'Mca_2_filetered.xlsx', selectedColumns)}>
                                         Export Selected
                                     </button>
                                     {/* export all */}
