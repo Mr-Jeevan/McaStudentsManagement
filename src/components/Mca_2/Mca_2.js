@@ -4,6 +4,8 @@ import "./index.css"
 
 import { exportToExcel } from '../utils/ExportToExcel';
 import { exportFilteredToExcel } from '../utils/ExportToExcel';
+
+
 const Mca_2 = () => {
     const [students, setStudents] = useState([]);
     const [selectedColumns, setSelectedColumns] = useState(['ID', 'Name', 'Age']); // default selected
@@ -146,7 +148,7 @@ const Mca_2 = () => {
                     <div className="accordion-item">
                         <h2 className="accordion-header">
                             <button className="accordion-button btn collapsed bg-info text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Export
+                                <div className='text-center'>ACTIONS</div>
                             </button>
                         </h2>
                         {/* accordion */}
@@ -161,7 +163,7 @@ const Mca_2 = () => {
                                         onChange={(e) => setNewColumn(e.target.value)}
                                     />
                                     <button
-                                        className="btn btn-outline-secondary"
+                                        className="btn btn-success"
                                         onClick={() => {
                                             if (newColumn && !allColumns.includes(newColumn)) {
                                                 setAllColumns([...allColumns, newColumn]);
@@ -179,6 +181,7 @@ const Mca_2 = () => {
                                         Add Column
                                     </button>
                                 </div>
+                                <hr />
 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                                     {/* export specifics */}
@@ -238,50 +241,19 @@ const Mca_2 = () => {
                             </tr>
                         </thead>
 
-                        <tbody className=''>
-                            {students.map((student) => (
-                                <tr key={student.ID}>
-                                    <td className="sticky-col">{student.ID}</td>
-                                    <td className="sticky-col-2">{student.Name}</td>
-                                    <td>{student.Age}</td>
-                                    <td>{student["Hostel / Day Scholar"]}</td>
-                                    <td>{student.dob}</td>
-                                    <td>{student.gender}</td>
-                                    <td>{student["Student Contact"]}</td>
-                                    <td>{student["Blood Group"]}</td>
-                                    <td>{student["Bus No."]}</td>
-                                    <td>{student["10%"]}</td>
-                                    <td>{student["12%"]}</td>
-                                    <td>{student["CGPA in UG"]}</td>
-                                    <td>{student["CGPA in PG"]}</td>
-                                    <td>{student["CURRENT ARREAR"]}</td>
-                                    <td>{student["Fathers Name"]}</td>
-                                    <td>{student["Fathers Ph."]}</td>
-                                    <td>{student["Fathers Occupation"]}</td>
-                                    <td>{student["Mothers Name"]}</td>
-                                    <td>{student["Mothers Ph."]}</td>
-                                    <td>{student["Mothers Occupation"]}</td>
-                                    <td>{student["Guardian Name"]}</td>
-                                    <td>{student.Relationship}</td>
-                                    <td>{student["Guardian occupation"]}</td>
-                                    <td>{student["Guardian Phone No."]}</td>
-                                    <td>{student["Door No. & Street"]}</td>
-                                    <td>{student["Town/ Village"]}</td>
-                                    <td>{student.Post}</td>
-                                    <td>{student.Taluk}</td>
-                                    <td>{student.District}</td>
-                                    <td>{student.State}</td>
-                                    <td>{student.Pincode}</td>
-                                    <td>{student.Country}</td>
-                                    <td>{student["Email Id (College)"]}</td>
-                                    <td>{student["Email Id (Personal)"]}</td>
-                                    <td>{student["Licence Number"]}</td>
-                                    <td>{student["Passport Number"]}</td>
-                                    <td>{student["Aadhaar Number"]}</td>
-                                    <td>{student.PAN}</td>
+                        <tbody>
+                            {students.map((student, i) => (
+                                <tr key={student.id}>
+
+                                    {allColumns.map((col, idx) => (
+                                        <td key={col} className={idx === 0 ? "sticky-col" : idx === 1 ? "sticky-col-2" : ""}>
+                                            {student[col] ?? ""}
+                                        </td>
+                                    ))}
                                 </tr>
                             ))}
                         </tbody>
+
 
                         {/* <td>
                             <button onClick={() => window.location.href = `/edit-student/${student.id}`}>Edit</button>
