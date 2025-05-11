@@ -8,7 +8,7 @@ const Mca_2 = () => {
     const [students, setStudents] = useState([]);
     const [selectedColumns, setSelectedColumns] = useState(['ID', 'Name', 'Age']); // default selected
 
-    const allColumns = [
+    const [allColumns, setAllColumns] = useState([
         'ID',
         'Name',
         'Age',
@@ -47,7 +47,10 @@ const Mca_2 = () => {
         'Passport Number',
         'Aadhaar Number',
         'PAN'
-    ];
+    ]);
+
+    const [newColumn, setNewColumn] = useState('');
+
 
     const handleCheckboxChange = (col) => {
         setSelectedColumns((prev) =>
@@ -149,6 +152,33 @@ const Mca_2 = () => {
                         {/* accordion */}
                         <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div className="accordion-body">
+                                <div className="d-flex mb-3">
+                                    <input
+                                        type="text"
+                                        className="form-control me-2"
+                                        placeholder="Enter new column name"
+                                        value={newColumn}
+                                        onChange={(e) => setNewColumn(e.target.value)}
+                                    />
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        onClick={() => {
+                                            if (newColumn && !allColumns.includes(newColumn)) {
+                                                setAllColumns([...allColumns, newColumn]);
+                                                setStudents(prev =>
+                                                    prev.map(student => ({
+                                                        ...student,
+                                                        [newColumn]: "" // default value for the new column
+                                                    }))
+                                                );
+                                                setNewColumn('');
+                                            }
+                                        }}
+
+                                    >
+                                        Add Column
+                                    </button>
+                                </div>
 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                                     {/* export specifics */}
@@ -198,49 +228,16 @@ const Mca_2 = () => {
                 {/* data table */}
                 <div className="overflow-auto table-responsive" >
                     <table className="table table-striped table-bordered mt-3" >
-                        <thead className='table-primary'>
-                            <tr className=''>
-                                <th className="sticky-col">ID</th>
-                                <th className="sticky-col-2">Name</th>
-                                <th>Age</th>
-                                <th>Hostel / Day Scholar</th>
-                                <th>dob</th>
-                                <th>gender</th>
-                                <th>Student Contact</th>
-                                <th>Blood Group</th>
-                                <th>Bus No.</th>
-                                <th>10%</th>
-                                <th>12%</th>
-                                <th>CGPA in UG</th>
-                                <th>CGPA in PG</th>
-                                <th>CGPA in PG</th>
-                                <th>CURRENT ARREAR </th>
-                                <th>Fathers Name</th>
-                                <th>Fathers Ph.</th>
-                                <th>Fathers Occupation</th>
-                                <th>Mothers Name</th>
-                                <th>Mothers Ph.</th>
-                                <th>Mothers Occupation</th>
-                                <th>Guardian Name</th>
-                                <th>Relationship</th>
-                                <th>Guardian occupation</th>
-                                <th>Guardian Phone No.</th>
-                                <th>Door No. & Street</th>
-                                <th>Town/ Village</th>
-                                <th>Post</th>
-                                <th>Taluk</th>
-                                <th>District</th>
-                                <th>State</th>
-                                <th>Pincode</th>
-                                <th>Country</th>
-                                <th>Email Id (College)</th>
-                                <th>Email Id (Personal)</th>
-                                <th>Licence Number</th>
-                                <th>Passport Number</th>
-                                <th>Aadhaar Number</th>
-                                <th>PAN</th>
+                        <thead className="table-primary">
+                            <tr>
+                                {allColumns.map((col, idx) => (
+                                    <th key={col} className={idx === 0 ? "sticky-col" : idx === 1 ? "sticky-col-2" : ""}>
+                                        {col}
+                                    </th>
+                                ))}
                             </tr>
                         </thead>
+
                         <tbody className=''>
                             {students.map((student) => (
                                 <tr key={student.ID}>
@@ -256,7 +253,6 @@ const Mca_2 = () => {
                                     <td>{student["10%"]}</td>
                                     <td>{student["12%"]}</td>
                                     <td>{student["CGPA in UG"]}</td>
-                                    <td>{student["CGPA in PG"]}</td>
                                     <td>{student["CGPA in PG"]}</td>
                                     <td>{student["CURRENT ARREAR"]}</td>
                                     <td>{student["Fathers Name"]}</td>

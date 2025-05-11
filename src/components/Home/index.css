@@ -15,11 +15,10 @@
 
 
 .card {
-    width: 220px;
-    min-height: 220px;
-    height: 220px;
+    width: 200px;
+    min-height: 200px;
+    height: 200px;
     background: #fff;
-    border-top-right-radius: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -35,7 +34,7 @@
     align-items: center;
     box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
         0 24px 46px var(--box-shadow-color);
-    width: 420px;
+    width: 300px;
 }
 
 .card:hover .overlay {
@@ -48,11 +47,11 @@
 }
 
 .card.c_1:hover .circle {
-    transform: translateX(120px);
+    transform: translateX(70px);
 }
 
 .card.c_2:hover .circle {
-    transform: translateX(-120px);
+    transform: translateX(-70px);
 }
 
 .card:hover .circle:after {
@@ -92,8 +91,8 @@
     position: absolute;
     border-radius: 50%;
     background: var(--bg-color);
-    top: 48px;
-    left: 50px;
+    top: 38px;
+    left: 40px;
     z-index: 0;
     transition: transform 0.3s ease-out;
 }
@@ -111,18 +110,6 @@
     font-size: 28px;
     transform: rotate(-20deg) scale(1.2);
 }
-
-/* 
-.overlay {
-    width: 118px;
-    position: absolute;
-    height: 118px;
-    border-radius: 50%;
-    background: var(--bg-color);
-    left: 40px;
-    z-index: 0;
-    transition: transform 0.3s ease-out;
-} */
 
 #hero_img {
     animation: hero_diamond 2s ease-in-out infinite;

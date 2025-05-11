@@ -39,7 +39,7 @@ function Header() {
                             <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
                             {/* <li className="nav-item"><a className="nav-link" href="#!">Link</a></li> */}
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Class</a>
+                                <a className="nav-link dropdown-toggle" id="navbarDropdown" href="example.com" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Class</a>
                                 <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <Link className="nav-link" to="/">MCA I</Link>
                                     <Link className="nav-link" to="/Mca_1">MCA II</Link>
