@@ -2,10 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
-import Sidebar from './components/layout/sidebar';
+// import Sidebar from './components/layout/sidebar';
 import Header from './components/layout/header';
 import Home from './components/Home/Home';
-import Mca_2 from './components/Mca_2/Mca_2';
+import McaTwo from './components/Mca_2/McaTwo';
+
+import EditableTable from './components/utils-tries/EditableTable';
+import LongPress from './components/tries/LongPress'
+
 function App() {
   return (
     <Router>
@@ -16,7 +20,10 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Mca_2" element={<Mca_2 />} />
+              <Route path="/McaTwo" element={<McaTwo />} />
+              <Route path='/EditableTable' element={<EditableTable />} />
+              <Route path='/LongPress' element={<LongPress />} />
+              {/* Add more routes as needed */}
             </Routes>
           </div>
         </div>

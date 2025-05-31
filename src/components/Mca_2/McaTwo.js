@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import "./index.css"
 
@@ -6,12 +6,15 @@ import { exportToExcel } from '../utils/ExportToExcel';
 import { exportFilteredToExcel } from '../utils/ExportToExcel';
 
 
-const Mca_2 = () => {
+const McaTwo = () => {
     const [students, setStudents] = useState([]);
-    const [selectedColumns, setSelectedColumns] = useState(['ID', 'Name', 'Age']); // default selected
+    const [selectedColumns, setSelectedColumns] = useState(['id', 'Name', 'Age']); // default selected
+
+    const [pressTimer, setPressTimer] = useState(null);
+    const [showEditForId, setShowEditForId] = useState(null);
 
     const [allColumns, setAllColumns] = useState([
-        'ID',
+        'id',
         'Name',
         'Age',
         'Hostel / Day Scholar',
@@ -54,6 +57,20 @@ const Mca_2 = () => {
     const [newColumn, setNewColumn] = useState('');
 
 
+
+    const handleMouseDown = (id) => {
+
+        const timer = setTimeout(() => {
+            setShowEditForId(id);
+        }, 300);
+        setPressTimer(timer);
+    };
+
+    const cancelPress = () => {
+        clearTimeout(pressTimer);
+    };
+
+
     const handleCheckboxChange = (col) => {
         setSelectedColumns((prev) =>
             prev.includes(col)
@@ -62,60 +79,6 @@ const Mca_2 = () => {
         );
     };
 
-    // const allColumns = [
-    //     { key: 'ID', label: 'ID' },
-    //     { key: 'Name', label: 'Name' },
-    //     { key: 'Age', label: 'Age' },
-    //     { key: 'Hostel / Day Scholar', label: 'Hostel / Day Scholar' },
-    //     { key: 'dob', label: 'DOB' },
-    //     { key: 'gender', label: 'Gender' },
-    //     { key: 'Student Contact', label: 'Student Contact' },
-    //     { key: 'Blood Group', label: 'Blood Group' },
-    //     { key: 'Bus No.', label: 'Bus No.' },
-    //     { key: '10%', label: '10%' },
-    //     { key: '12%', label: '12%' },
-    //     { key: 'CGPA in UG', label: 'CGPA in UG' },
-    //     { key: 'CGPA in PG', label: 'CGPA in PG' },
-    //     { key: 'CURRENT ARREAR', label: 'Current Arrear' },
-    //     { key: 'Fathers Name', label: "Father's Name" },
-    //     { key: 'Fathers Ph.', label: "Father's Ph." },
-    //     { key: 'Fathers Occupation', label: "Father's Occupation" },
-    //     { key: 'Mothers Name', label: "Mother's Name" },
-    //     { key: 'Mothers Ph.', label: "Mother's Ph." },
-    //     { key: 'Mothers Occupation', label: "Mother's Occupation" },
-    //     { key: 'Guardian Name', label: 'Guardian Name' },
-    //     { key: 'Relationship', label: 'Relationship' },
-    //     { key: 'Guardian occupation', label: 'Guardian Occupation' },
-    //     { key: 'Guardian Phone No.', label: 'Guardian Phone No.' },
-    //     { key: 'Door No. & Street', label: 'Door No. & Street' },
-    //     { key: 'Town/ Village', label: 'Town/Village' },
-    //     { key: 'Post', label: 'Post' },
-    //     { key: 'Taluk', label: 'Taluk' },
-    //     { key: 'District', label: 'District' },
-    //     { key: 'State', label: 'State' },
-    //     { key: 'Pincode', label: 'Pincode' },
-    //     { key: 'Country', label: 'Country' },
-    //     { key: 'Email Id (College)', label: 'Email (College)' },
-    //     { key: 'Email Id (Personal)', label: 'Email (Personal)' },
-    //     { key: 'Licence Number', label: 'Licence Number' },
-    //     { key: 'Passport Number', label: 'Passport Number' },
-    //     { key: 'Aadhaar Number', label: 'Aadhaar Number' },
-    //     { key: 'PAN', label: 'PAN' },
-    // ];
-    // const [selectedColumns, setSelectedColumns] = useState(allColumns.map(c => c.key));
-    // const toggleColumn = (key) => {
-    //     setSelectedColumns(prev =>
-    //         prev.includes(key) ? prev.filter(col => col !== key) : [...prev, key]
-    //     );
-    // };
-
-    // const filteredData = students.map(student => {
-    //     const entry = {};
-    //     selectedColumns.forEach(col => {
-    //         entry[col] = student[col];
-    //     });
-    //     return entry;
-    // });
 
     useEffect(() => {
         // Mock data or fetch from API
@@ -246,19 +209,32 @@ const Mca_2 = () => {
                                 <tr key={student.id}>
 
                                     {allColumns.map((col, idx) => (
-                                        <td key={col} className={idx === 0 ? "sticky-col" : idx === 1 ? "sticky-col-2" : ""}>
-                                            {student[col] ?? ""}
+                                        <td
+                                            key={col}
+                                            className={idx === 0 ? "sticky-col" : idx === 1 ? "sticky-col-2" : ""}
+                                            onMouseDown={idx === 0 ? () => handleMouseDown(student.id) : undefined}
+                                            onMouseUp={idx === 0 ? cancelPress : undefined}
+                                            onMouseLeave={idx === 0 ? cancelPress : undefined}
+                                            onTouchStart={idx === 0 ? () => handleMouseDown(student.id) : undefined}
+                                            onTouchEnd={idx === 0 ? cancelPress : undefined}
+                                        >
+                                            {idx === 0 ? i + 1 : student[col] ?? ""}
+                                            {idx === 0 && showEditForId === student.id && (
+                                                <button
+                                                    onClick={() => {
+                                                        alert(`Edit student ${student.Name}`);
+                                                        setShowEditForId(null); // reset after click
+                                                    }}
+                                                    className="btn btn-sm btn-info ms-2"
+                                                >
+                                                    Edit
+                                                </button>
+                                            )}
                                         </td>
                                     ))}
                                 </tr>
                             ))}
                         </tbody>
-
-
-                        {/* <td>
-                            <button onClick={() => window.location.href = `/edit-student/${student.id}`}>Edit</button>
-                            <button onClick={() => {dklfn}}>Delete</button>
-                            </td> */}
                     </table>
                 </div>
             </div >
@@ -266,4 +242,4 @@ const Mca_2 = () => {
     );
 };
 
-export default Mca_2;
+export default McaTwo;

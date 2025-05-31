@@ -33,7 +33,7 @@ const Home = () => {
                             </div>
 
                             <div className="card_container_mca2 me-5">
-                                <Link className="nav-link" to="/Mca_2">
+                                <Link className="nav-link" to="/McaTwo">
 
                                     <div className="card my-3 ms-auto c_2 wallet">
                                         <div className="overlay"></div>
