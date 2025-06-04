@@ -1,58 +1,28 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 import "./index.css"
+
+import { McaTwoColumns } from '../config/McaTwoColumns';
+
 
 import { exportToExcel } from '../utils/ExportToExcel';
 import { exportFilteredToExcel } from '../utils/ExportToExcel';
 
 
+
 const McaTwo = () => {
-    const [students, setStudents] = useState([]);
-    const [selectedColumns, setSelectedColumns] = useState(['id', 'Name', 'Age']); // default selected
+
+    const navigate = useNavigate();
 
     const [pressTimer, setPressTimer] = useState(null);
     const [showEditForId, setShowEditForId] = useState(null);
 
-    const [allColumns, setAllColumns] = useState([
-        'id',
-        'Name',
-        'Age',
-        'Hostel / Day Scholar',
-        'dob',
-        'gender',
-        'Student Contact',
-        'Blood Group',
-        'Bus No.',
-        '10%',
-        '12%',
-        'CGPA in UG',
-        'CGPA in PG',
-        'CURRENT ARREAR',
-        'Fathers Name',
-        'Fathers Ph.',
-        'Fathers Occupation',
-        'Mothers Name',
-        'Mothers Ph.',
-        'Mothers Occupation',
-        'Guardian Name',
-        'Relationship',
-        'Guardian occupation',
-        'Guardian Phone No.',
-        'Door No. & Street',
-        'Town/ Village',
-        'Post',
-        'Taluk',
-        'District',
-        'State',
-        'Pincode',
-        'Country',
-        'Email Id (College)',
-        'Email Id (Personal)',
-        'Licence Number',
-        'Passport Number',
-        'Aadhaar Number',
-        'PAN'
-    ]);
+    const [students, setStudents] = useState([]);
+    const [selectedColumns, setSelectedColumns] = useState(['id', 'Name', 'Age']); // default selected
+
+    const [allColumns, setAllColumns] = useState(McaTwoColumns);
 
     const [newColumn, setNewColumn] = useState('');
 
@@ -91,6 +61,7 @@ const McaTwo = () => {
 
                     const data = await response.json();
                     setStudents(data);
+                    // console.log('Fetched students:', data[0].id);
                 }
 
             } catch (error) {
@@ -207,7 +178,6 @@ const McaTwo = () => {
                         <tbody>
                             {students.map((student, i) => (
                                 <tr key={student.id}>
-
                                     {allColumns.map((col, idx) => (
                                         <td
                                             key={col}
@@ -222,7 +192,8 @@ const McaTwo = () => {
                                             {idx === 0 && showEditForId === student.id && (
                                                 <button
                                                     onClick={() => {
-                                                        alert(`Edit student ${student.Name}`);
+                                                        alert(`Edit student ${student.Name} ${student.id || 'No ID found'}`);
+                                                        navigate(`/Edit/${student.id}`)
                                                         setShowEditForId(null); // reset after click
                                                     }}
                                                     className="btn btn-sm btn-info ms-2"

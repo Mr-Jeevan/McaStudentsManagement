@@ -6,9 +6,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/header';
 import Home from './components/Home/Home';
 import McaTwo from './components/Mca_2/McaTwo';
+import Edit from './components/Editpage/Edit';
 
 import EditableTable from './components/utils-tries/EditableTable';
-import LongPress from './components/tries/LongPress'
+// import LongPress from './components/tries/LongPress'
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/McaTwo" element={<McaTwo />} />
               <Route path='/EditableTable' element={<EditableTable />} />
-              <Route path='/LongPress' element={<LongPress />} />
+              <Route path="/edit/:id" element={<Edit />} />
               {/* Add more routes as needed */}
             </Routes>
           </div>
