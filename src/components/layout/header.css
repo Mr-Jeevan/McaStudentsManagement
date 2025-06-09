@@ -1,14 +1,6 @@
 /* .navbar {
-    background-color: #343a40;
     color: white;
     padding: 3rem 2rem;
     text-align: center;
     clip-path: path("M 0 0 H 100% V 80 Q 50% 140 100% 80 V 0 Z");
-}
-
-@supports not (clip-path: path("M0,0 L100,0")) {
-    .navbar {
-        border-bottom-left-radius: 100% 10%;
-        border-bottom-right-radius: 100% 10%;
-    }
 } */

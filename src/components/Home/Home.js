@@ -7,7 +7,7 @@ const Home = () => {
 
     return (
         <>
-            <section>
+            <section className="pt-5">
                 <div className="container bg-primary rounded-3 shadow-lg p-3 mt-5 mb-5">
                     {/* heading */}
                     <div className="heading">
@@ -56,6 +56,11 @@ const Home = () => {
 
             </section>
 
+            <section>
+                <div>
+
+                </div>
+            </section>
 
         </>
     );

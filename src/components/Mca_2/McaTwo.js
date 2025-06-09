@@ -73,9 +73,9 @@ const McaTwo = () => {
 
     return (
         <>
-            <div className='container '>
+            <div className='container mt-5 '>
                 <div>
-                    <h1>Student Management System</h1>
+                    <h1>MCA II Management System</h1>
                 </div>
 
                 <div className="accordion accordion-flush shadow-sm border rounded " id="accordionFlushExample">
