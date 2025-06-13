@@ -29,7 +29,7 @@ function Header() {
     }
     return (
         <>
-            <nav className="navbar p-1 navbar-expand-lg border-bottom fixed-top mb-5">
+            <nav className="navbar p-1 navbar-expand-lg border-bottom fixed-top mb-5 bg-dark ">
                 <div className="container-fluid d-flex align-items-center justify-content-between">
 
                     {/* LEFT: Logo */}

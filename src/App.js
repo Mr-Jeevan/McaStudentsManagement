@@ -7,6 +7,7 @@ import Header from './components/layout/header';
 import Home from './components/Home/Home';
 import McaTwo from './components/Mca_2/McaTwo';
 import Edit from './components/Editpage/Edit';
+import AddStudents from './components/addStudents/AddStudents';
 
 import EditableTable from './components/utils-tries/EditableTable';
 // import LongPress from './components/tries/LongPress'
@@ -24,6 +25,7 @@ function App() {
               <Route path="/McaTwo" element={<McaTwo />} />
               <Route path='/EditableTable' element={<EditableTable />} />
               <Route path="/edit/:id" element={<Edit />} />
+              <Route path="/AddStudents" element={<AddStudents />} />
               {/* Add more routes as needed */}
             </Routes>
           </div>
