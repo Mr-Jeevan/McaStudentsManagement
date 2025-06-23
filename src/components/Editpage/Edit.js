@@ -28,14 +28,7 @@ const Edit = () => {
         fetchStudents();
     }, []);
 
-    // const handleSave = () => {
-    //     setStudents((prev) =>
-    //         prev.map((s) =>
-    //             s["id"] === editingStudent["id"] ? editingStudent : s
-    //         )
-    //     );
-    //     setEditingStudent(null);
-    // };
+
 
     const handleSave = async () => {
         try {
